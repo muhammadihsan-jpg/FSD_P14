@@ -1,0 +1,54 @@
+---
+title: "Tugas FSD"
+output: html_notebook
+author: 19523198_Muhammad Ihsan Nurulhuda
+---
+
+
+```{r}
+set.seed(10111)
+```
+
+```{r}
+x <-matrix(rnorm(88),44, 2)
+x
+```
+
+```{r}
+y <- factor(rep(c(0,1), each=22))
+y
+```
+
+```{r}
+x[y == 1, ] <- x[y == 1, ] + 6
+```
+
+```{r}
+myData <- data.frame(x,y)
+head(myData)
+```
+
+```{r}
+colnames(myData) <- c("Pembalap", "Cidera", "Fit")
+head(myData)
+```
+
+```{r}
+plot(myData$Cidera,myData$Pemain, col = ifelse(y=="1", "green", "red"), pch = 19)
+``` 
+
+```{r}
+library(e1071)
+```
+
+```{r}
+modelSVM1 <- svm(Fit ~ ., data = myData, kernel = "linear")
+```
+
+```{r}
+print(modelSVM1)
+```
+
+```{r, plotSVM}
+plot(modelSVM1, myData)
+```
